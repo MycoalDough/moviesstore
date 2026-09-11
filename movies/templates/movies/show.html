@@ -49,6 +49,11 @@
               href="{% url 'movies.delete_review' id=template_data.movie.id review_id=review.id %}">Delete
             </a>
             {% endif %}
+            {% if user.is_authenticated and user != review.user %}
+            <a class="btn btn-danger"
+              href="{% url 'movies.report_review' id=template_data.movie.id review_id=review.id %}">Report Review
+            </a>
+            {% endif %}
           </li>
           {% endfor %}
         </ul>
@@ -82,9 +87,9 @@
         </div>
         {% endif %}
       </div>
-      <div class="col-md-6 mx-auto mb-3 text-center">
+      <div class="col-md-6 mx-auto mb-3 text-center d-flex align-items-center justify-content-center">
         <img src="{{ template_data.movie.image.url }}"
-          class="rounded img-card-400"/>
+          class="rounded img-fluid img-card-400" style="object-fit: contain; max-height: 500px; width: auto;"/>
       </div>
     </div>
   </div>
